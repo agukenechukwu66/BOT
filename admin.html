@@ -3,35 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>VERTAX | Admin</title>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #060b0a;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    header {
-      height: 70px;
-      padding: 0 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #08100e;
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; background: #060b0a; color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    header { height: 70px; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; background: #08100e; border-bottom: 1px solid rgba(255,255,255,.07); }
     .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; }
     .logo { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg,#39e38c,#159866); color: #04120b; font-size: 13px; font-weight: 900; }
     .logout { border: 1px solid #2b4039; background: transparent; color: #aebbb7; padding: 9px 15px; border-radius: 9px; cursor: pointer; }
@@ -66,11 +44,27 @@
     .empty { padding: 45px 20px; text-align: center; color: #687773; font-size: 13px; }
     #loading { min-height: 100vh; display: grid; place-items: center; color: #91a09c; }
     #admin { display: none; }
+
+    .manager { margin: 24px 0; }
+    .manager-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; padding: 20px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #9aa9a4; font-size: 12px; }
+    .field input, .field select, .field textarea { width: 100%; padding: 12px; border-radius: 9px; border: 1px solid #263b34; background: #07100d; color: #fff; font: inherit; }
+    .field textarea { resize: vertical; min-height: 82px; }
+    .manager-submit { margin: 0 20px 20px; border: 0; border-radius: 8px; padding: 11px 16px; background: #39df8c; color: #03120b; font-weight: 700; cursor: pointer; }
+    .manager-submit:disabled { opacity: .55; cursor: wait; }
+    .manager-message { display: none; margin: 0 20px 18px; padding: 12px; border-radius: 9px; font-size: 13px; }
+    .manager-message.error { display: block; background: rgba(255,70,70,.08); border: 1px solid rgba(255,70,70,.18); color: #ffaaaa; }
+    .manager-message.success { display: block; background: rgba(73,223,146,.08); border: 1px solid rgba(73,223,146,.18); color: #8df0ba; }
     .error { margin-bottom: 20px; padding: 13px; border-radius: 10px; background: rgba(255,70,70,.08); border: 1px solid rgba(255,70,70,.18); color: #ffaaaa; font-size: 13px; display: none; }
+
     @media (max-width: 700px) {
       header { padding: 0 18px; }
       main { width: calc(100% - 30px); padding-top: 25px; }
       .stats { grid-template-columns: 1fr; }
+      .manager-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
     }
   </style>
 </head>
@@ -98,11 +92,46 @@
       <div class="stat"><div class="stat-label">Approved USDT</div><div class="stat-value green" id="approvedAmount">$0.00</div></div>
     </section>
 
+    <section class="panel manager">
+      <div class="panel-header"><h2>Profit Manager</h2></div>
+      <form id="tradeForm">
+        <div class="manager-grid">
+          <div class="field">
+            <label for="tradeUser">User</label>
+            <select id="tradeUser" required><option value="">Loading users…</option></select>
+          </div>
+          <div class="field">
+            <label for="tradeAsset">Asset</label>
+            <input id="tradeAsset" value="GOLD/USDT" maxlength="40" required>
+          </div>
+          <div class="field">
+            <label for="tradeType">Result</label>
+            <select id="tradeType" required>
+              <option value="profit">Profit</option>
+              <option value="loss">Loss</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tradeAmount">Amount</label>
+            <input id="tradeAmount" type="number" min="0.01" step="0.01" placeholder="10.00" required>
+          </div>
+          <div class="field full">
+            <label for="tradeDescription">Description</label>
+            <textarea id="tradeDescription" maxlength="500" placeholder="Trade result details"></textarea>
+          </div>
+        </div>
+        <button class="manager-submit" id="tradeSubmit" type="submit">Record Trade</button>
+        <div id="tradeMessage" class="manager-message" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
     <section class="panel">
       <div class="panel-header"><h2>Deposit Requests</h2></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>User</th><th>Amount</th><th>Currency</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+          <thead>
+            <tr><th>User</th><th>Amount</th><th>Currency</th><th>Status</th><th>Date</th><th>Action</th></tr>
+          </thead>
           <tbody id="depositTable"></tbody>
         </table>
       </div>
@@ -114,7 +143,6 @@
   const SUPABASE_URL = "https://eqggkzwenddrscuborlo.supabase.co";
   const SUPABASE_KEY = "sb_publishable_anum8CtI4AsIFBkxjJAWIQ_-1B9laW1";
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
   const ADMIN_EMAIL = "agukenechukwu66@gmail.com";
 
   function showError(message) {
@@ -154,6 +182,7 @@
     }
 
     renderDeposits(data || []);
+    populateTradeUsers(data || []);
   }
 
   function renderDeposits(deposits) {
@@ -197,6 +226,80 @@
     document.getElementById("approvedAmount").textContent = "$" + approvedAmount.toFixed(2);
   }
 
+  function populateTradeUsers(deposits) {
+    const select = document.getElementById("tradeUser");
+    const ids = Array.from(new Set(deposits.map(function(row) {
+      return row.user_id;
+    }).filter(Boolean)));
+
+    if (!ids.length) {
+      select.innerHTML = `<option value="">No users found in deposits</option>`;
+      select.disabled = true;
+      return;
+    }
+
+    select.disabled = false;
+    select.innerHTML = `<option value="">Select a user</option>` + ids.map(function(id) {
+      const safe = escapeHtml(id);
+      return `<option value="${safe}">${safe}</option>`;
+    }).join("");
+  }
+
+  function showTradeMessage(message, kind) {
+    const box = document.getElementById("tradeMessage");
+    box.textContent = message;
+    box.className = "manager-message " + kind;
+  }
+
+  document.getElementById("tradeForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const userId = document.getElementById("tradeUser").value;
+    const asset = document.getElementById("tradeAsset").value.trim();
+    const tradeType = document.getElementById("tradeType").value;
+    const amount = Number(document.getElementById("tradeAmount").value);
+    const description = document.getElementById("tradeDescription").value.trim();
+
+    if (!userId || !asset || !Number.isFinite(amount) || amount <= 0) {
+      showTradeMessage("Choose a user and enter an asset and a positive amount.", "error");
+      return;
+    }
+
+    const button = document.getElementById("tradeSubmit");
+    button.disabled = true;
+
+    try {
+      const { error } = await supabaseClient
+        .from("trade_history")
+        .insert({
+          user_id: userId,
+          asset: asset,
+          trade_type: tradeType,
+          amount: amount,
+          description: description || null
+        });
+
+      if (error) {
+        console.error(error);
+
+        if (error.code === "42501" || /row-level security|permission denied|not allowed/i.test(error.message || "")) {
+          throw new Error("Supabase denied this write. The current trade_history policy permits users to view their own records but does not allow admin inserts. No trade was recorded. An authorized insert policy or secured database function must be configured before this can succeed.");
+        }
+
+        throw new Error("Could not record trade: " + error.message);
+      }
+
+      showTradeMessage("Trade recorded in the selected user's trade history.", "success");
+      document.getElementById("tradeAmount").value = "";
+      document.getElementById("tradeDescription").value = "";
+    } catch (error) {
+      console.error(error);
+      showTradeMessage(error.message || "Could not record trade. No change was made.", "error");
+    } finally {
+      button.disabled = false;
+    }
+  });
+
   async function updateDeposit(depositId, newStatus, button) {
     if (newStatus !== "approved" && newStatus !== "declined") return;
 
@@ -216,7 +319,7 @@
 
         if (error) throw error;
       } else {
-        // Include the current status in the update so only pending rows can be declined.
+        // Only update a row that is still pending.
         const { data, error } = await supabaseClient
           .from("deposits")
           .update({ status: "declined" })
@@ -226,6 +329,7 @@
           .maybeSingle();
 
         if (error) throw error;
+
         if (!data) {
           showError("This deposit is no longer pending. The list has been refreshed.");
           await loadDeposits();
