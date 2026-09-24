@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VERTAX | Trading Platform</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(34, 197, 94, .16), transparent 30%),
+        radial-gradient(circle at 10% 90%, rgba(20, 184, 166, .12), transparent 30%),
+        #060b0a;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .page {
+      min-height: calc(100vh - 40px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      background: rgba(12, 20, 18, .94);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 30px 100px rgba(0,0,0,.5);
+    }
+
+    /* LEFT SIDE */
+
+    .hero {
+      padding: clamp(30px, 5vw, 65px);
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 65px;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #39e68d, #0d9b67);
+      color: #04120b;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -2px;
+      max-width: 650px;
+    }
+
+    .hero h1 span {
+      color: #39df8c;
+    }
+
+    .hero-text {
+      margin-top: 25px;
+      max-width: 560px;
+      color: #9caeaa;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 42px;
+    }
+
+    .card {
+      padding: 17px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .card-text {
+      color: #778782;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* RIGHT SIDE */
+
+    .auth {
+      padding: 42px;
+      background: rgba(255,255,255,.025);
+      border-left: 1px solid rgba(255,255,255,.07);
+    }
+
+    .auth h2 {
+      font-size: 29px;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      color: #7f908b;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      padding: 5px;
+      background: #07100e;
+      border-radius: 12px;
+      margin-bottom: 23px;
+    }
+
+    .tab {
+      border: none;
+      padding: 12px;
+      border-radius: 9px;
+      background: transparent;
+      color: #71807c;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .tab.active {
+      background: #183029;
+      color: #fff;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #b5c1be;
+      font-size: 12px;
+    }
+
+    .field input {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: 1px solid #263832;
+      outline: none;
+      background: #07100e;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .field input:focus {
+      border-color: #31d985;
+      box-shadow: 0 0 0 3px rgba(49,217,133,.08);
+    }
+
+    .button {
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 11px;
+      margin-top: 5px;
+      background: linear-gradient(135deg, #3be38e, #149c69);
+      color: #03120b;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .button:hover {
+      filter: brightness(1.08);
+    }
+
+    .button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .error {
+      color: #ffaaaa;
+      background: rgba(255,70,70,.08);
+      border: 1px solid rgba(255,70,70,.18);
+    }
+
+    .success {
+      color: #72e7a8;
+      background: rgba(50,220,140,.08);
+      border: 1px solid rgba(50,220,140,.18);
+    }
+
+    .terms {
+      margin-top: 18px;
+      color: #66736f;
+      font-size: 10px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+
+      body {
+        padding: 10px;
+      }
+
+      .page {
+        min-height: calc(100vh - 20px);
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 30px 22px;
+      }
+
+      .brand {
+        margin-bottom: 35px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero-text {
+        font-size: 14px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        margin-top: 25px;
+      }
+
+      .card {
+        padding: 13px;
+      }
+
+      .auth {
+        padding: 25px 20px;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,.07);
+      }
+    }
+
+    @media (max-width: 400px) {
+
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      .auth {
+        padding: 22px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          VX
+        </div>
+
+        <div class="brand-name">
+          VERTAX
+        </div>
+
+      </div>
+
+      <h1>
+        Trade smarter.<br>
+        Manage your <span>portfolio.</span>
+      </h1>
+
+      <p class="hero-text">
+        Welcome to VERTAX, a digital trading platform designed
+        to give users a simple and organized way to manage
+        their trading account and activity.
+      </p>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-title">
+            Secure Access
+          </div>
+
+          <div class="card-text">
+            Individual accounts with protected authentication.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            Trading History
+          </div>
+
+          <div class="card-text">
+            View recorded trading activity and account history.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            USDT Deposits
+          </div>
+
+          <div class="card-text">
+            Submit deposits for verification through your account.
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- AUTH -->
+
+    <section class="auth">
+
+      <h2 id="authTitle">
+        Welcome back
+      </h2>
+
+      <p class="subtitle" id="authSubtitle">
+        Sign in to access your VERTAX account.
+      </p>
+
+
+      <div class="tabs">
+
+        <button
+          class="tab active"
+          id="loginTab"
+          onclick="showLogin()"
+        >
+          Login
+        </button>
+
+        <button
+          class="tab"
+          id="registerTab"
+          onclick="showRegister()"
+        >
+          Create Account
+        </button>
+
+      </div>
+
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+
+      <!-- LOGIN -->
+
+      <form id="loginForm">
+
+        <div class="field">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="you@example.com"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="button"
+          id="loginButton"
+        >
+          Sign In
+        </button>
+
+      </form>
+
+
+      <!-- REGISTER -->
+
+      <form
+        id="registerForm"
+        class="hidden"
+      >
+
+        <div class="field">
+
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Your full name"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Username</label>
+
+          <input
+            type="text"
+            id="username"
+            placeholder="Choose a username"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Email</label>
+
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="you@example.com"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Minimum 6 characters"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Confirm Password</label>
+
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Repeat your password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="button"
+          id="registerButton"
+        >
+          Create Account
+        </button>
+
+      </form>
+
+
+      <div class="terms">
+        By creating an account, you agree to VERTAX's
+        terms and conditions.
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  // ==========================================
+  // VERTAX SUPABASE CONNECTION
+  // ==========================================
+
+  const SUPABASE_URL =
+    "https://eqggkzwenddrscuborlo.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_anum8CtI4AsIFBkxjJAWIQ_-1B9laW1";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  // ==========================================
+  // MESSAGE
+  // ==========================================
+
+  function showMessage(text, type = "error") {
+
+    const box =
+      document.getElementById("message");
+
+    box.textContent = text;
+
+    box.className =
+      "message show " + type;
+  }
+
+
+  function clearMessage() {
+
+    const box =
+      document.getElementById("message");
+
+    box.textContent = "";
+
+    box.className = "message";
+  }
+
+
+  // ==========================================
+  // SHOW LOGIN
+  // ==========================================
+
+  function showLogin() {
+
+    clearMessage();
+
+    document
+      .getElementById("loginForm")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("registerForm")
+      .classList.add("hidden");
+
+    document
+      .getElementById("loginTab")
+      .classList.add("active");
+
+    document
+      .getElementById("registerTab")
+      .classList.remove("active");
+
+    document
+      .getElementById("authTitle")
+      .textContent = "Welcome back";
+
+    document
+      .getElementById("authSubtitle")
+      .textContent =
+      "Sign in to access your VERTAX account.";
+  }
+
+
+  // ==========================================
+  // SHOW REGISTER
+  // ==========================================
+
+  function showRegister() {
+
+    clearMessage();
+
+    document
+      .getElementById("loginForm")
+      .classList.add("hidden");
+
+    document
+      .getElementById("registerForm")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("loginTab")
+      .classList.remove("active");
+
+    document
+      .getElementById("registerTab")
+      .classList.add("active");
+
+    document
+      .getElementById("authTitle")
+      .textContent = "Create account";
+
+    document
+      .getElementById("authSubtitle")
+      .textContent =
+      "Create your secure VERTAX account.";
+  }
+
+
+  // ==========================================
+  // CREATE ACCOUNT
+  // ==========================================
+
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessage();
+
+      const button =
+        document.getElementById("registerButton");
+
+      const fullName =
+        document.getElementById("fullName")
+        .value
+        .trim();
+
+      const username =
+        document.getElementById("username")
+        .value
+        .trim();
+
+      const email =
+        document.getElementById("registerEmail")
+        .value
+        .trim();
+
+      const password =
+        document.getElementById("registerPassword")
+        .value;
+
+      const confirmPassword =
+        document.getElementById("confirmPassword")
+        .value;
+
+
+      if (password !== confirmPassword) {
+
+        showMessage(
+          "Passwords do not match."
+        );
+
+        return;
+      }
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Creating account...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+        await supabaseClient.auth.signUp({
+
+          email: email,
+
+          password: password,
+
+          options: {
+
+            data: {
+
+              full_name: fullName,
+
+              username: username
+
+            }
+
+          }
+
+        });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage(
+          "Your VERTAX account has been created successfully.",
+          "success"
+        );
+
+
+        document
+          .getElementById("registerForm")
+          .reset();
+
+
+      } catch (error) {
+
+        showMessage(
+          error.message ||
+          "Unable to create account."
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Create Account";
+      }
+
+    });
+
+
+  // ==========================================
+  // LOGIN
+  // ==========================================
+
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessage();
+
+      const button =
+        document.getElementById("loginButton");
+
+      const email =
+        document.getElementById("loginEmail")
+        .value
+        .trim();
+
+      const password =
+        document.getElementById("loginPassword")
+        .value;
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "Signing in...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+        await supabaseClient.auth.signInWithPassword({
+
+          email: email,
+
+          password: password
+
+        });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage(
+          "Login successful.",
+          "success"
+        );
+
+
+        /*
+          We will connect the VERTAX
+          dashboard here in the next step.
+        */
+
+
+      } catch (error) {
+
+        showMessage(
+          error.message ||
+          "Unable to sign in."
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "Sign In";
+      }
+
+    });
+
+</script>
+
+</body>
+</html>
