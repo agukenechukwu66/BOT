@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>VERTAX | Trading Platform</title>
+  <title>VERTAX | Dashboard</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -17,297 +17,267 @@
 
     body {
       min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 85% 10%, rgba(34, 197, 94, .16), transparent 30%),
-        radial-gradient(circle at 10% 90%, rgba(20, 184, 166, .12), transparent 30%),
-        #060b0a;
+      background: #060b0a;
       color: #fff;
-      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .page {
-      min-height: calc(100vh - 40px);
+    .app {
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+
+    header {
+      height: 70px;
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1080px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      background: rgba(12, 20, 18, .94);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: 0 30px 100px rgba(0,0,0,.5);
-    }
-
-    /* LEFT SIDE */
-
-    .hero {
-      padding: clamp(30px, 5vw, 65px);
-      position: relative;
+      justify-content: space-between;
+      padding: 0 5%;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: #08100e;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 65px;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 20px;
     }
 
-    .brand-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #39e68d, #0d9b67);
+      background: linear-gradient(135deg,#39e38c,#159866);
       color: #04120b;
-      font-size: 18px;
       font-weight: 900;
     }
 
-    .brand-name {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .5px;
+    .logout {
+      border: 1px solid #294039;
+      background: transparent;
+      color: #a9b8b4;
+      padding: 9px 15px;
+      border-radius: 9px;
+      cursor: pointer;
     }
 
-    .hero h1 {
-      font-size: clamp(40px, 5vw, 68px);
-      line-height: 1.02;
-      letter-spacing: -2px;
-      max-width: 650px;
+    /* MAIN */
+
+    main {
+      width: 90%;
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 35px 0 60px;
     }
 
-    .hero h1 span {
-      color: #39df8c;
-    }
-
-    .hero-text {
-      margin-top: 25px;
-      max-width: 560px;
-      color: #9caeaa;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 42px;
-    }
-
-    .card {
-      padding: 17px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    .card-title {
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .card-text {
-      color: #778782;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    /* RIGHT SIDE */
-
-    .auth {
-      padding: 42px;
-      background: rgba(255,255,255,.025);
-      border-left: 1px solid rgba(255,255,255,.07);
-    }
-
-    .auth h2 {
-      font-size: 29px;
-      margin-bottom: 7px;
-    }
-
-    .subtitle {
-      color: #7f908b;
-      font-size: 14px;
+    .welcome {
       margin-bottom: 25px;
     }
 
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5px;
-      padding: 5px;
-      background: #07100e;
-      border-radius: 12px;
-      margin-bottom: 23px;
+    .welcome h1 {
+      font-size: clamp(25px, 4vw, 36px);
+      margin-bottom: 7px;
     }
 
-    .tab {
-      border: none;
-      padding: 12px;
-      border-radius: 9px;
-      background: transparent;
-      color: #71807c;
-      cursor: pointer;
+    .welcome p {
+      color: #7f908b;
+      font-size: 14px;
+    }
+
+    /* BALANCE */
+
+    .balance-card {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(54,226,139,.18),transparent 35%),
+        linear-gradient(135deg,#10211c,#0a1512);
+      border: 1px solid rgba(255,255,255,.07);
+      margin-bottom: 20px;
+    }
+
+    .balance-label {
+      color: #94a49f;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .balance {
+      font-size: clamp(38px, 7vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .currency {
+      font-size: 14px;
+      color: #81918c;
+      margin-left: 5px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: #0b1512;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .stat-label {
+      color: #81908b;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .stat-value {
+      font-size: 22px;
       font-weight: 700;
     }
 
-    .tab.active {
-      background: #183029;
-      color: #fff;
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
 
-    .field {
-      margin-bottom: 15px;
+    .panel {
+      background: #0b1512;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 17px;
+      overflow: hidden;
     }
 
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      color: #b5c1be;
+    .panel-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-header h2 {
+      font-size: 16px;
+    }
+
+    .panel-header span {
+      color: #71817c;
       font-size: 12px;
     }
 
-    .field input {
-      width: 100%;
-      height: 48px;
-      padding: 0 14px;
-      border-radius: 10px;
-      border: 1px solid #263832;
-      outline: none;
-      background: #07100e;
-      color: #fff;
-      font-size: 14px;
-    }
-
-    .field input:focus {
-      border-color: #31d985;
-      box-shadow: 0 0 0 3px rgba(49,217,133,.08);
-    }
-
-    .button {
-      width: 100%;
-      height: 50px;
-      border: none;
-      border-radius: 11px;
-      margin-top: 5px;
-      background: linear-gradient(135deg, #3be38e, #149c69);
-      color: #03120b;
-      font-weight: 900;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .button:hover {
-      filter: brightness(1.08);
-    }
-
-    .button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .message {
-      display: none;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .message.show {
-      display: block;
-    }
-
-    .error {
-      color: #ffaaaa;
-      background: rgba(255,70,70,.08);
-      border: 1px solid rgba(255,70,70,.18);
-    }
-
-    .success {
-      color: #72e7a8;
-      background: rgba(50,220,140,.08);
-      border: 1px solid rgba(50,220,140,.18);
-    }
-
-    .terms {
-      margin-top: 18px;
-      color: #66736f;
-      font-size: 10px;
-      line-height: 1.5;
+    .empty {
+      padding: 40px 20px;
       text-align: center;
+      color: #697873;
+      font-size: 13px;
     }
 
-    @media (max-width: 850px) {
+    /* ACTIVITY */
 
-      body {
-        padding: 10px;
+    .activity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.045);
+    }
+
+    .activity:last-child {
+      border-bottom: 0;
+    }
+
+    .asset {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .date {
+      color: #687772;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .profit {
+      color: #48df92;
+      font-weight: 700;
+    }
+
+    .loss {
+      color: #ff7d7d;
+      font-weight: 700;
+    }
+
+    /* DEPOSIT */
+
+    .deposit-button {
+      border: none;
+      background: linear-gradient(135deg,#39df8c,#149b68);
+      color: #03110a;
+      font-weight: 800;
+      padding: 10px 15px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    /* LOADING */
+
+    #loading {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: #8d9d98;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+
+      header {
+        padding: 0 18px;
       }
 
-      .page {
-        min-height: calc(100vh - 20px);
+      main {
+        width: calc(100% - 30px);
+        padding-top: 25px;
       }
 
-      .container {
+      .stats {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding: 30px 22px;
-      }
-
-      .brand {
-        margin-bottom: 35px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-        letter-spacing: -1.5px;
-      }
-
-      .hero-text {
-        font-size: 14px;
-      }
-
-      .cards {
+      .grid {
         grid-template-columns: 1fr;
-        margin-top: 25px;
       }
 
-      .card {
-        padding: 13px;
-      }
-
-      .auth {
+      .balance-card {
         padding: 25px 20px;
-        border-left: none;
-        border-top: 1px solid rgba(255,255,255,.07);
-      }
-    }
-
-    @media (max-width: 400px) {
-
-      .hero h1 {
-        font-size: 35px;
       }
 
-      .auth {
-        padding: 22px 16px;
+      .balance {
+        font-size: 43px;
+      }
+
+      .panel-header {
+        padding: 17px;
       }
     }
   </style>
@@ -315,255 +285,192 @@
 
 <body>
 
-<div class="page">
+<div id="loading">
+  Loading VERTAX...
+</div>
 
-  <div class="container">
 
-    <!-- HERO -->
+<div id="dashboard">
 
-    <section class="hero">
+  <header>
 
-      <div class="brand">
+    <div class="brand">
 
-        <div class="brand-logo">
-          VX
-        </div>
-
-        <div class="brand-name">
-          VERTAX
-        </div>
-
+      <div class="logo">
+        VX
       </div>
+
+      VERTAX
+
+    </div>
+
+    <button
+      class="logout"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </header>
+
+
+  <main>
+
+    <section class="welcome">
 
       <h1>
-        Trade smarter.<br>
-        Manage your <span>portfolio.</span>
+        Welcome, <span id="username">User</span>
       </h1>
 
-      <p class="hero-text">
-        Welcome to VERTAX, a digital trading platform designed
-        to give users a simple and organized way to manage
-        their trading account and activity.
+      <p>
+        Here's an overview of your VERTAX trading account.
       </p>
 
-      <div class="cards">
+    </section>
 
-        <div class="card">
-          <div class="card-title">
-            Secure Access
-          </div>
 
-          <div class="card-text">
-            Individual accounts with protected authentication.
-          </div>
+    <!-- BALANCE -->
+
+    <section class="balance-card">
+
+      <div class="balance-label">
+        Available Balance
+      </div>
+
+      <div class="balance">
+
+        $<span id="balance">
+          0.00
+        </span>
+
+        <span class="currency">
+          USDT
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Total Profit
         </div>
 
-        <div class="card">
-          <div class="card-title">
+        <div
+          class="stat-value"
+          id="totalProfit"
+        >
+          $0.00
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Total Trades
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalTrades"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Account Status
+        </div>
+
+        <div
+          class="stat-value"
+          id="accountStatus"
+        >
+          Active
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <section class="grid">
+
+
+      <!-- TRADING HISTORY -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
             Trading History
-          </div>
+          </h2>
 
-          <div class="card-text">
-            View recorded trading activity and account history.
-          </div>
+          <span>
+            GOLD / USDT
+          </span>
+
         </div>
 
-        <div class="card">
-          <div class="card-title">
-            USDT Deposits
+        <div id="tradeHistory">
+
+          <div class="empty">
+            No trading activity yet.
           </div>
 
-          <div class="card-text">
-            Submit deposits for verification through your account.
-          </div>
         </div>
 
       </div>
+
+
+      <!-- DEPOSITS -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Deposit History
+          </h2>
+
+          <button
+            class="deposit-button"
+            onclick="alert('Deposit page will be added next.')"
+          >
+            Deposit USDT
+          </button>
+
+        </div>
+
+        <div id="depositHistory">
+
+          <div class="empty">
+            No deposits yet.
+          </div>
+
+        </div>
+
+      </div>
+
 
     </section>
 
-
-    <!-- AUTH -->
-
-    <section class="auth">
-
-      <h2 id="authTitle">
-        Welcome back
-      </h2>
-
-      <p class="subtitle" id="authSubtitle">
-        Sign in to access your VERTAX account.
-      </p>
-
-
-      <div class="tabs">
-
-        <button
-          class="tab active"
-          id="loginTab"
-          onclick="showLogin()"
-        >
-          Login
-        </button>
-
-        <button
-          class="tab"
-          id="registerTab"
-          onclick="showRegister()"
-        >
-          Create Account
-        </button>
-
-      </div>
-
-
-      <div
-        id="message"
-        class="message"
-      ></div>
-
-
-      <!-- LOGIN -->
-
-      <form id="loginForm">
-
-        <div class="field">
-
-          <label>Email</label>
-
-          <input
-            type="email"
-            id="loginEmail"
-            placeholder="you@example.com"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Password</label>
-
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="Enter your password"
-            required
-          >
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="button"
-          id="loginButton"
-        >
-          Sign In
-        </button>
-
-      </form>
-
-
-      <!-- REGISTER -->
-
-      <form
-        id="registerForm"
-        class="hidden"
-      >
-
-        <div class="field">
-
-          <label>Full Name</label>
-
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Your full name"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Username</label>
-
-          <input
-            type="text"
-            id="username"
-            placeholder="Choose a username"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Email</label>
-
-          <input
-            type="email"
-            id="registerEmail"
-            placeholder="you@example.com"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Password</label>
-
-          <input
-            type="password"
-            id="registerPassword"
-            placeholder="Minimum 6 characters"
-            minlength="6"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Confirm Password</label>
-
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Repeat your password"
-            minlength="6"
-            required
-          >
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="button"
-          id="registerButton"
-        >
-          Create Account
-        </button>
-
-      </form>
-
-
-      <div class="terms">
-        By creating an account, you agree to VERTAX's
-        terms and conditions.
-      </div>
-
-    </section>
-
-  </div>
+  </main>
 
 </div>
 
@@ -571,315 +478,347 @@
 <script>
 
   // ==========================================
-  // VERTAX SUPABASE CONNECTION
+  // SUPABASE
   // ==========================================
 
   const SUPABASE_URL =
     "https://eqggkzwenddrscuborlo.supabase.co";
 
-  const SUPABASE_PUBLISHABLE_KEY =
+  const SUPABASE_KEY =
     "sb_publishable_anum8CtI4AsIFBkxjJAWIQ_-1B9laW1";
-
 
   const supabaseClient =
     window.supabase.createClient(
       SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+      SUPABASE_KEY
     );
 
 
   // ==========================================
-  // MESSAGE
+  // LOAD USER
   // ==========================================
 
-  function showMessage(text, type = "error") {
+  async function loadDashboard() {
 
-    const box =
-      document.getElementById("message");
-
-    box.textContent = text;
-
-    box.className =
-      "message show " + type;
-  }
+    const {
+      data: { user },
+      error: authError
+    } =
+      await supabaseClient.auth.getUser();
 
 
-  function clearMessage() {
+    if (authError || !user) {
 
-    const box =
-      document.getElementById("message");
+      window.location.href =
+        "index.html";
 
-    box.textContent = "";
-
-    box.className = "message";
-  }
+      return;
+    }
 
 
-  // ==========================================
-  // SHOW LOGIN
-  // ==========================================
+    // Get this user's profile only
 
-  function showLogin() {
+    const {
+      data: profile,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
 
-    clearMessage();
 
-    document
-      .getElementById("loginForm")
-      .classList.remove("hidden");
+    if (error) {
 
-    document
-      .getElementById("registerForm")
-      .classList.add("hidden");
+      console.error(error);
 
-    document
-      .getElementById("loginTab")
-      .classList.add("active");
+      alert(
+        "Unable to load your profile."
+      );
 
-    document
-      .getElementById("registerTab")
-      .classList.remove("active");
+      return;
+    }
+
 
     document
-      .getElementById("authTitle")
-      .textContent = "Welcome back";
-
-    document
-      .getElementById("authSubtitle")
+      .getElementById("username")
       .textContent =
-      "Sign in to access your VERTAX account.";
-  }
+      profile.username ||
+      profile.full_name ||
+      "User";
 
-
-  // ==========================================
-  // SHOW REGISTER
-  // ==========================================
-
-  function showRegister() {
-
-    clearMessage();
 
     document
-      .getElementById("loginForm")
-      .classList.add("hidden");
-
-    document
-      .getElementById("registerForm")
-      .classList.remove("hidden");
-
-    document
-      .getElementById("loginTab")
-      .classList.remove("active");
-
-    document
-      .getElementById("registerTab")
-      .classList.add("active");
-
-    document
-      .getElementById("authTitle")
-      .textContent = "Create account";
-
-    document
-      .getElementById("authSubtitle")
+      .getElementById("balance")
       .textContent =
-      "Create your secure VERTAX account.";
+      Number(profile.balance || 0)
+      .toFixed(2);
+
+
+    await loadTrades(user.id);
+
+    await loadDeposits(user.id);
+
+
+    document
+      .getElementById("loading")
+      .style.display = "none";
+
+    document
+      .getElementById("dashboard")
+      .style.display = "block";
   }
 
 
   // ==========================================
-  // CREATE ACCOUNT
+  // LOAD TRADES
   // ==========================================
 
-  document
-    .getElementById("registerForm")
-    .addEventListener("submit", async function(event) {
+  async function loadTrades(userId) {
 
-      event.preventDefault();
-
-      clearMessage();
-
-      const button =
-        document.getElementById("registerButton");
-
-      const fullName =
-        document.getElementById("fullName")
-        .value
-        .trim();
-
-      const username =
-        document.getElementById("username")
-        .value
-        .trim();
-
-      const email =
-        document.getElementById("registerEmail")
-        .value
-        .trim();
-
-      const password =
-        document.getElementById("registerPassword")
-        .value;
-
-      const confirmPassword =
-        document.getElementById("confirmPassword")
-        .value;
-
-
-      if (password !== confirmPassword) {
-
-        showMessage(
-          "Passwords do not match."
-        );
-
-        return;
-      }
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Creating account...";
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-        await supabaseClient.auth.signUp({
-
-          email: email,
-
-          password: password,
-
-          options: {
-
-            data: {
-
-              full_name: fullName,
-
-              username: username
-
-            }
-
-          }
-
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("trade_history")
+        .select("*")
+        .eq("user_id", userId)
+        .order("created_at", {
+          ascending: false
         });
 
 
-        if (error) {
-          throw error;
+    if (error) {
+
+      console.error(error);
+
+      return;
+    }
+
+
+    const container =
+      document.getElementById(
+        "tradeHistory"
+      );
+
+
+    if (!data || data.length === 0) {
+
+      container.innerHTML =
+        '<div class="empty">No trading activity yet.</div>';
+
+      document
+        .getElementById("totalTrades")
+        .textContent = "0";
+
+      return;
+    }
+
+
+    let totalProfit = 0;
+
+
+    container.innerHTML =
+      data.map(trade => {
+
+        const amount =
+          Number(trade.amount || 0);
+
+
+        const isProfit =
+          trade.trade_type === "profit";
+
+
+        if (isProfit) {
+
+          totalProfit += amount;
+
+        } else {
+
+          totalProfit -= amount;
+
         }
 
 
-        showMessage(
-          "Your VERTAX account has been created successfully.",
-          "success"
-        );
+        const sign =
+          isProfit ? "+" : "-";
 
 
-        document
-          .getElementById("registerForm")
-          .reset();
+        const className =
+          isProfit ? "profit" : "loss";
 
 
-      } catch (error) {
+        const date =
+          new Date(
+            trade.created_at
+          ).toLocaleDateString();
 
-        showMessage(
-          error.message ||
-          "Unable to create account."
-        );
 
-      } finally {
+        return `
 
-        button.disabled = false;
+          <div class="activity">
 
-        button.textContent =
-          "Create Account";
-      }
+            <div>
 
-    });
+              <div class="asset">
+                ${escapeHtml(
+                  trade.asset ||
+                  "GOLD/USDT"
+                )}
+              </div>
+
+              <div class="date">
+                ${date}
+              </div>
+
+            </div>
+
+            <div class="${className}">
+              ${sign}$${amount.toFixed(2)}
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+
+    document
+      .getElementById("totalTrades")
+      .textContent =
+      data.length;
+
+
+    document
+      .getElementById("totalProfit")
+      .textContent =
+      "$" + totalProfit.toFixed(2);
+  }
 
 
   // ==========================================
-  // LOGIN
+  // LOAD DEPOSITS
   // ==========================================
 
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", async function(event) {
+  async function loadDeposits(userId) {
 
-      event.preventDefault();
-
-      clearMessage();
-
-      const button =
-        document.getElementById("loginButton");
-
-      const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
-
-      const password =
-        document.getElementById("loginPassword")
-        .value;
-
-
-      button.disabled = true;
-
-      button.textContent =
-        "Signing in...";
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-        await supabaseClient.auth.signInWithPassword({
-
-          email: email,
-
-          password: password
-
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("deposits")
+        .select("*")
+        .eq("user_id", userId)
+        .order("created_at", {
+          ascending: false
         });
 
 
-        if (error) {
-          throw error;
-        }
+    if (error) {
+
+      console.error(error);
+
+      return;
+    }
 
 
-        showMessage(
-          "Login successful.",
-          "success"
-        );
+    const container =
+      document.getElementById(
+        "depositHistory"
+      );
 
 
-        /*
-          We will connect the VERTAX
-          dashboard here in the next step.
-        */
+    if (!data || data.length === 0) {
+
+      container.innerHTML =
+        '<div class="empty">No deposits yet.</div>';
+
+      return;
+    }
 
 
-      } catch (error) {
+    container.innerHTML =
+      data.map(deposit => {
 
-        showMessage(
-          error.message ||
-          "Unable to sign in."
-        );
+        const date =
+          new Date(
+            deposit.created_at
+          ).toLocaleDateString();
 
-      } finally {
 
-        button.disabled = false;
+        return `
 
-        button.textContent =
-          "Sign In";
-      }
+          <div class="activity">
 
-    });
+            <div>
+
+              <div class="asset">
+                ${deposit.currency || "USDT"}
+              </div>
+
+              <div class="date">
+                ${date}
+              </div>
+
+            </div>
+
+            <div>
+              $${Number(
+                deposit.amount || 0
+              ).toFixed(2)}
+              <br>
+              <small>
+                ${escapeHtml(
+                  deposit.status
+                )}
+              </small>
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+  }
+
+
+  // ==========================================
+  // LOGOUT
+  // ==========================================
+
+  async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href =
+      "index.html";
+  }
+
+
+  // ==========================================
+  // SECURITY — ESCAPE DISPLAYED TEXT
+  // ==========================================
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  // ==========================================
+  // START
+  // ==========================================
+
+  loadDashboard();
 
 </script>
 
