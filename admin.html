@@ -32,722 +32,233 @@
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg,#39e38c,#159866);
-      color: #04120b;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .logout {
-      border: 1px solid #2b4039;
-      background: transparent;
-      color: #aebbb7;
-      padding: 9px 15px;
-      border-radius: 9px;
-      cursor: pointer;
-    }
-
-    main {
-      width: 92%;
-      max-width: 1250px;
-      margin: auto;
-      padding: 35px 0 60px;
-    }
-
-    .heading {
-      margin-bottom: 25px;
-    }
-
-    .heading h1 {
-      font-size: clamp(28px,5vw,42px);
-      margin-bottom: 7px;
-    }
-
-    .heading p {
-      color: #7f908b;
-      font-size: 14px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .stat {
-      background: #0b1512;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 15px;
-      padding: 21px;
-    }
-
-    .stat-label {
-      color: #81908b;
-      font-size: 12px;
-      margin-bottom: 9px;
-    }
-
-    .stat-value {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .green {
-      color: #49df92;
-    }
-
-    .panel {
-      background: #0b1512;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 17px;
-      overflow: hidden;
-    }
-
-    .panel-header {
-      padding: 20px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-
-    .panel-header h2 {
-      font-size: 17px;
-    }
-
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 760px;
-    }
-
-    th,
-    td {
-      padding: 15px 18px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,.045);
-      font-size: 12px;
-    }
-
-    th {
-      color: #71817c;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    td {
-      color: #d7dfdc;
-    }
-
-    .email {
-      color: #8d9c97;
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    .amount {
-      font-weight: 800;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 10px;
-      text-transform: capitalize;
-    }
-
-    .status.pending {
-      color: #e2bd65;
-      background: rgba(226,189,101,.09);
-    }
-
-    .status.approved {
-      color: #49df92;
-      background: rgba(73,223,146,.09);
-    }
-
-    .status.declined {
-      color: #ff7d7d;
-      background: rgba(255,125,125,.09);
-    }
-
-    .actions {
-      display: flex;
-      gap: 7px;
-    }
-
-    .approve,
-    .decline {
-      border: none;
-      padding: 8px 11px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .approve {
-      background: #39df8c;
-      color: #03120b;
-    }
-
-    .decline {
-      background: #291416;
-      color: #ff9a9a;
-      border: 1px solid #4b2528;
-    }
-
-    .empty {
-      padding: 45px 20px;
-      text-align: center;
-      color: #687773;
-      font-size: 13px;
-    }
-
-    #loading {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      color: #91a09c;
-    }
-
-    #admin {
-      display: none;
-    }
-
-    .error {
-      margin-bottom: 20px;
-      padding: 13px;
-      border-radius: 10px;
-      background: rgba(255,70,70,.08);
-      border: 1px solid rgba(255,70,70,.18);
-      color: #ffaaaa;
-      font-size: 13px;
-      display: none;
-    }
-
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; }
+    .logo { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg,#39e38c,#159866); color: #04120b; font-size: 13px; font-weight: 900; }
+    .logout { border: 1px solid #2b4039; background: transparent; color: #aebbb7; padding: 9px 15px; border-radius: 9px; cursor: pointer; }
+    main { width: 92%; max-width: 1250px; margin: auto; padding: 35px 0 60px; }
+    .heading { margin-bottom: 25px; }
+    .heading h1 { font-size: clamp(28px,5vw,42px); margin-bottom: 7px; }
+    .heading p { color: #7f908b; font-size: 14px; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-bottom: 25px; }
+    .stat { background: #0b1512; border: 1px solid rgba(255,255,255,.07); border-radius: 15px; padding: 21px; }
+    .stat-label { color: #81908b; font-size: 12px; margin-bottom: 9px; }
+    .stat-value { font-size: 25px; font-weight: 800; }
+    .green { color: #49df92; }
+    .panel { background: #0b1512; border: 1px solid rgba(255,255,255,.07); border-radius: 17px; overflow: hidden; }
+    .panel-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .panel-header h2 { font-size: 17px; }
+    .table-wrap { width: 100%; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 15px 18px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.045); font-size: 12px; }
+    th { color: #71817c; font-size: 11px; font-weight: 700; }
+    td { color: #d7dfdc; }
+    .email { color: #8d9c97; font-size: 11px; margin-top: 4px; }
+    .amount { font-weight: 800; }
+    .status { display: inline-block; padding: 5px 9px; border-radius: 20px; font-size: 10px; text-transform: capitalize; }
+    .status.pending { color: #e2bd65; background: rgba(226,189,101,.09); }
+    .status.approved { color: #49df92; background: rgba(73,223,146,.09); }
+    .status.declined { color: #ff7d7d; background: rgba(255,125,125,.09); }
+    .actions { display: flex; gap: 7px; }
+    .approve, .decline { border: none; padding: 8px 11px; border-radius: 7px; cursor: pointer; font-size: 11px; font-weight: 700; }
+    .approve { background: #39df8c; color: #03120b; }
+    .decline { background: #291416; color: #ff9a9a; border: 1px solid #4b2528; }
+    .approve:disabled, .decline:disabled { opacity: .55; cursor: wait; }
+    .empty { padding: 45px 20px; text-align: center; color: #687773; font-size: 13px; }
+    #loading { min-height: 100vh; display: grid; place-items: center; color: #91a09c; }
+    #admin { display: none; }
+    .error { margin-bottom: 20px; padding: 13px; border-radius: 10px; background: rgba(255,70,70,.08); border: 1px solid rgba(255,70,70,.18); color: #ffaaaa; font-size: 13px; display: none; }
     @media (max-width: 700px) {
-      header {
-        padding: 0 18px;
-      }
-
-      main {
-        width: calc(100% - 30px);
-        padding-top: 25px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
+      header { padding: 0 18px; }
+      main { width: calc(100% - 30px); padding-top: 25px; }
+      .stats { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-
-<div id="loading">
-  Checking administrator access...
-</div>
+<div id="loading">Checking administrator access...</div>
 
 <div id="admin">
-
   <header>
-
-    <div class="brand">
-      <div class="logo">VX</div>
-      VERTAX ADMIN
-    </div>
-
-    <button
-      class="logout"
-      onclick="logout()"
-    >
-      Logout
-    </button>
-
+    <div class="brand"><div class="logo">VX</div>VERTAX ADMIN</div>
+    <button class="logout" onclick="logout()">Logout</button>
   </header>
 
   <main>
-
     <div class="heading">
-
       <h1>Admin Dashboard</h1>
-
-      <p>
-        Review and manage submitted USDT deposits.
-      </p>
-
+      <p>Review and manage submitted USDT deposits.</p>
     </div>
 
-    <div
-      id="errorBox"
-      class="error"
-    ></div>
+    <div id="errorBox" class="error"></div>
 
     <section class="stats">
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Pending Deposits
-        </div>
-
-        <div
-          class="stat-value"
-          id="pendingCount"
-        >
-          0
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Approved Deposits
-        </div>
-
-        <div
-          class="stat-value green"
-          id="approvedCount"
-        >
-          0
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Approved USDT
-        </div>
-
-        <div
-          class="stat-value green"
-          id="approvedAmount"
-        >
-          $0.00
-        </div>
-
-      </div>
-
+      <div class="stat"><div class="stat-label">Pending Deposits</div><div class="stat-value" id="pendingCount">0</div></div>
+      <div class="stat"><div class="stat-label">Approved Deposits</div><div class="stat-value green" id="approvedCount">0</div></div>
+      <div class="stat"><div class="stat-label">Approved USDT</div><div class="stat-value green" id="approvedAmount">$0.00</div></div>
     </section>
-
 
     <section class="panel">
-
-      <div class="panel-header">
-
-        <h2>
-          Deposit Requests
-        </h2>
-
-      </div>
-
+      <div class="panel-header"><h2>Deposit Requests</h2></div>
       <div class="table-wrap">
-
         <table>
-
-          <thead>
-
-            <tr>
-              <th>User</th>
-              <th>Amount</th>
-              <th>Currency</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-
-          </thead>
-
-          <tbody id="depositTable">
-
-          </tbody>
-
+          <thead><tr><th>User</th><th>Amount</th><th>Currency</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+          <tbody id="depositTable"></tbody>
         </table>
-
       </div>
-
     </section>
-
   </main>
-
 </div>
 
-
 <script>
+  const SUPABASE_URL = "https://eqggkzwenddrscuborlo.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_anum8CtI4AsIFBkxjJAWIQ_-1B9laW1";
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const SUPABASE_URL =
-    "https://eqggkzwenddrscuborlo.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_anum8CtI4AsIFBkxjJAWIQ_-1B9laW1";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-
-  /*
-    IMPORTANT
-
-    Replace this with the email of the
-    administrator account you created
-    in Supabase Authentication.
-  */
-
-  const ADMIN_EMAIL =
-    "agukenechukwu66@gmail.com";
-
+  const ADMIN_EMAIL = "agukenechukwu66@gmail.com";
 
   function showError(message) {
-
-    const box =
-      document.getElementById("errorBox");
-
+    const box = document.getElementById("errorBox");
     box.textContent = message;
-
     box.style.display = "block";
   }
 
-
   async function checkAdmin() {
-
-    const {
-      data: {
-        user
-      },
-      error
-    } =
-      await supabaseClient.auth.getUser();
-
+    const { data: { user }, error } = await supabaseClient.auth.getUser();
 
     if (error || !user) {
-
-      window.location.href =
-        "index.html";
-
+      window.location.href = "index.html";
       return;
-
     }
 
-
-    if (
-      user.email.toLowerCase() !==
-      ADMIN_EMAIL.toLowerCase()
-    ) {
-
-      document.getElementById(
-        "loading"
-      ).textContent =
-        "Administrator access required.";
-
+    if ((user.email || "").toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+      document.getElementById("loading").textContent = "Administrator access required.";
       return;
-
     }
 
-
-    document.getElementById(
-      "loading"
-    ).style.display = "none";
-
-    document.getElementById(
-      "admin"
-    ).style.display = "block";
-
-
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("admin").style.display = "block";
     await loadDeposits();
-
   }
-
 
   async function loadDeposits() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("deposits")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        });
-
+    const { data, error } = await supabaseClient
+      .from("deposits")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
-
       console.error(error);
-
-      showError(
-        "Unable to load deposits: " +
-        error.message
-      );
-
+      showError("Unable to load deposits: " + error.message);
       return;
-
     }
 
-
     renderDeposits(data || []);
-
   }
 
-
   function renderDeposits(deposits) {
-
-    const table =
-      document.getElementById(
-        "depositTable"
-      );
-
-
+    const table = document.getElementById("depositTable");
     let pending = 0;
     let approved = 0;
     let approvedAmount = 0;
 
-
     if (!deposits.length) {
-
-      table.innerHTML = `
-        <tr>
-          <td colspan="6">
-            <div class="empty">
-              No deposit requests found.
-            </div>
-          </td>
-        </tr>
-      `;
-
+      table.innerHTML = `<tr><td colspan="6"><div class="empty">No deposit requests found.</div></td></tr>`;
     } else {
+      table.innerHTML = deposits.map(function(deposit) {
+        const status = String(deposit.status || "pending").toLowerCase();
+        if (status === "pending") pending++;
+        if (status === "approved") {
+          approved++;
+          approvedAmount += Number(deposit.amount || 0);
+        }
 
-      table.innerHTML =
-        deposits.map(function(deposit) {
+        const date = deposit.created_at ? new Date(deposit.created_at).toLocaleString() : "-";
+        const actions = status === "pending"
+          ? `<div class="actions">
+               <button class="approve" onclick="updateDeposit('${escapeHtml(deposit.id)}', 'approved', this)">Approve</button>
+               <button class="decline" onclick="updateDeposit('${escapeHtml(deposit.id)}', 'declined', this)">Decline</button>
+             </div>`
+          : "-";
 
-          const status =
-            String(
-              deposit.status || "pending"
-            ).toLowerCase();
-
-
-          if (status === "pending") {
-            pending++;
-          }
-
-
-          if (status === "approved") {
-
-            approved++;
-
-            approvedAmount +=
-              Number(
-                deposit.amount || 0
-              );
-
-          }
-
-
-          const date =
-            deposit.created_at
-              ? new Date(
-                  deposit.created_at
-                ).toLocaleString()
-              : "-";
-
-
-          const actions =
-            status === "pending"
-              ? `
-                <div class="actions">
-
-                  <button
-                    class="approve"
-                    onclick="updateDeposit(
-                      '${deposit.id}',
-                      'approved'
-                    )"
-                  >
-                    Approve
-                  </button>
-
-                  <button
-                    class="decline"
-                    onclick="updateDeposit(
-                      '${deposit.id}',
-                      'declined'
-                    )"
-                  >
-                    Decline
-                  </button>
-
-                </div>
-              `
-              : "-";
-
-
-          return `
-
-            <tr>
-
-              <td>
-
-                <strong>
-                  ${escapeHtml(
-                    deposit.user_id ||
-                    "Unknown user"
-                  )}
-                </strong>
-
-              </td>
-
-              <td class="amount">
-                $${Number(
-                  deposit.amount || 0
-                ).toFixed(2)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  deposit.currency ||
-                  "USDT"
-                )}
-              </td>
-
-              <td>
-
-                <span
-                  class="status ${status}"
-                >
-                  ${escapeHtml(status)}
-                </span>
-
-              </td>
-
-              <td>
-                ${date}
-              </td>
-
-              <td>
-                ${actions}
-              </td>
-
-            </tr>
-
-          `;
-
-        }).join("");
-
+        return `<tr>
+          <td><strong>${escapeHtml(deposit.user_id || "Unknown user")}</strong></td>
+          <td class="amount">$${Number(deposit.amount || 0).toFixed(2)}</td>
+          <td>${escapeHtml(deposit.currency || "USDT")}</td>
+          <td><span class="status ${escapeHtml(status)}">${escapeHtml(status)}</span></td>
+          <td>${escapeHtml(date)}</td>
+          <td>${actions}</td>
+        </tr>`;
+      }).join("");
     }
 
-
-    document.getElementById(
-      "pendingCount"
-    ).textContent = pending;
-
-
-    document.getElementById(
-      "approvedCount"
-    ).textContent = approved;
-
-
-    document.getElementById(
-      "approvedAmount"
-    ).textContent =
-      "$" + approvedAmount.toFixed(2);
-
+    document.getElementById("pendingCount").textContent = pending;
+    document.getElementById("approvedCount").textContent = approved;
+    document.getElementById("approvedAmount").textContent = "$" + approvedAmount.toFixed(2);
   }
 
+  async function updateDeposit(depositId, newStatus, button) {
+    if (newStatus !== "approved" && newStatus !== "declined") return;
 
-  async function updateDeposit(
-    depositId,
-    newStatus
-  ) {
+    const question = newStatus === "approved" ? "Approve this deposit?" : "Decline this deposit?";
+    if (!confirm(question)) return;
 
-    const question =
-      newStatus === "approved"
-        ? "Approve this deposit?"
-        : "Decline this deposit?";
+    const row = button && button.closest("tr");
+    const buttons = row ? row.querySelectorAll("button") : [];
+    buttons.forEach(function(item) { item.disabled = true; });
 
+    try {
+      if (newStatus === "approved") {
+        // The database function performs the approval and one-time balance credit atomically.
+        const { error } = await supabaseClient.rpc("approve_deposit", {
+          deposit_id: depositId
+        });
 
-    if (!confirm(question)) {
-      return;
+        if (error) throw error;
+      } else {
+        // Include the current status in the update so only pending rows can be declined.
+        const { data, error } = await supabaseClient
+          .from("deposits")
+          .update({ status: "declined" })
+          .eq("id", depositId)
+          .eq("status", "pending")
+          .select("id")
+          .maybeSingle();
+
+        if (error) throw error;
+        if (!data) {
+          showError("This deposit is no longer pending. The list has been refreshed.");
+          await loadDeposits();
+          return;
+        }
+      }
+
+      document.getElementById("errorBox").style.display = "none";
+      await loadDeposits();
+    } catch (error) {
+      console.error(error);
+      showError("Unable to " + (newStatus === "approved" ? "approve" : "decline") + " deposit: " + (error.message || "Unknown error"));
+      await loadDeposits();
+    } finally {
+      buttons.forEach(function(item) { item.disabled = false; });
     }
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("deposits")
-        .update({
-          status: newStatus
-        })
-        .eq("id", depositId);
-
-
-    if (error) {
-
-      showError(
-        "Unable to update deposit: " +
-        error.message
-      );
-
-      return;
-
-    }
-
-
-    await loadDeposits();
-
   }
-
 
   async function logout() {
-
     await supabaseClient.auth.signOut();
-
-    window.location.href =
-      "index.html";
-
+    window.location.href = "index.html";
   }
 
-
   function escapeHtml(value) {
-
     return String(value)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
-
   }
 
-
   checkAdmin();
-
 </script>
-
 </body>
 </html>
